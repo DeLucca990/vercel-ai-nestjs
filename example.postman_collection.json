@@ -1,0 +1,67 @@
+{
+  "info": {
+    "_postman_id": "d92a6889-4159-4e7a-9fa9-69ea73f6cedc",
+    "name": "Vercel AI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48378023"
+  },
+  "item": [
+    {
+      "name": "Stream Data",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/stream-data",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "stream-data"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Stream Custom Data",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/stream-custom-data",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "stream-custom-data"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Text Stream",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/text-stream",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "text-stream"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

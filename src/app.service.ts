@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { openai } from '@ai-sdk/openai';
 import { Injectable } from '@nestjs/common';
 import { createUIMessageStream, streamText } from 'ai';

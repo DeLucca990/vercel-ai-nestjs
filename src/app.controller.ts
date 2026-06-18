@@ -1,11 +1,7 @@
-import 'dotenv/config';
-
 import { Controller, Get, Post, Res } from '@nestjs/common';
 import express from 'express';
 import { AppService } from './app.service';
-import { 
-  pipeUIMessageStreamToResponse, 
-} from 'ai';
+import { pipeUIMessageStreamToResponse } from 'ai';
 
 @Controller()
 export class AppController {
@@ -16,21 +12,21 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Post('/text-stream')
+  async example(@Res() response: express.Response) {
+    const result = this.appService.textStream();
+    result.pipeTextStreamToResponse(response);
+  }
+
   @Post('/stream-data')
-  async root(@Res() res: express.Response) {
+  async root(@Res() response: express.Response) {
     const result = this.appService.streamData();
-    result.pipeUIMessageStreamToResponse(res as any);
+    result.pipeUIMessageStreamToResponse(response);
   }
 
   @Post('/stream-custom-data')
   async streamData(@Res() response: express.Response) {
-    const result = this.appService.streamCustomData();
-    pipeUIMessageStreamToResponse({ stream: result, response });
-  }
-
-  @Post('/text-stream')
-  async example(@Res() res: express.Response) {
-    const result = this.appService.textStream();
-    result.pipeTextStreamToResponse(res);
+    const stream = this.appService.streamCustomData();
+    pipeUIMessageStreamToResponse({ stream, response });
   }
 }

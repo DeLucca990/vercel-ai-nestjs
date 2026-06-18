@@ -1,11 +1,15 @@
-import { Controller, Get, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import express from 'express';
 import { AppService } from './app.service';
-import { pipeUIMessageStreamToResponse } from 'ai';
+import { AgentService } from './agent/agent.service';
+import { pipeAgentUIStreamToResponse, pipeUIMessageStreamToResponse, UIMessage } from 'ai';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private readonly agentService: AgentService,
+  ) {}
 
   @Get()
   getHello(): string {
@@ -28,5 +32,33 @@ export class AppController {
   async streamData(@Res() response: express.Response) {
     const stream = this.appService.streamCustomData();
     pipeUIMessageStreamToResponse({ stream, response });
+  }
+
+  @Post('/agent/weather/ask')
+  async agentAsk(@Body('prompt') prompt: string): Promise<{ text: string }> {
+    const text = await this.agentService.ask(
+      prompt ?? 'What is the weather like in Lisbon?',
+    );
+    return { text };
+  }
+
+  @Post('/agent/weather/stream')
+  async agentStream(
+    @Body('prompt') prompt: string,
+    @Res() response: express.Response,
+  ) {
+    const result = await this.agentService.stream(
+      prompt ?? 'Compare the weather in Lisbon and Porto.',
+    );
+    result.pipeUIMessageStreamToResponse(response);
+  }
+
+  @Post('/agent/weather/chat')
+  async agentChat(
+    @Body('messages') messages: UIMessage[],
+    @Res() response: express.Response,
+  ) {
+    const { agent, uiMessages } = this.agentService.uiStream(messages ?? []);
+    await pipeAgentUIStreamToResponse({ agent, uiMessages, response });
   }
 }

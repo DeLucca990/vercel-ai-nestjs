@@ -62,6 +62,96 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Ask Weather Agent",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"prompt\": \"Como está o tempo em Maceió\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/agent/weather/ask",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "agent",
+            "weather",
+            "ask"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Agent Weather Stream",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/agent/weather/stream",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "agent",
+            "weather",
+            "stream"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Agent Weather Chat",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"messages\": [\n        {\n            \"id\": \"1\",\n            \"role\": \"user\",\n            \"parts\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": \"How is the weather in Lisbon?\"\n                }\n            ]\n        },\n        {\n            \"id\": \"2\",\n            \"role\": \"assistant\",\n            \"parts\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": \"It's currently 22°C and partly cloudy in Lisbon.\"\n                }\n            ]\n        },\n        {\n            \"id\": \"3\",\n            \"role\": \"user\",\n            \"parts\": [\n                {\n                    \"type\": \"text\",\n                    \"text\": \"And in Porto?\"\n                }\n            ]\n        }\n    ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/agent/weather/chat",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "agent",
+            "weather",
+            "chat"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
